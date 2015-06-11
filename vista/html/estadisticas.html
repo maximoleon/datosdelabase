@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Estadisticas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../js/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+
+        <link href="../css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery/jquery-ui.min.js" type="text/javascript"></script>
+
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+
+        <link href="../css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery/jquery.dataTables.min.js" type="text/javascript"></script>
+
+        <link href="../css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery/dataTables.bootstrap.js" type="text/javascript"></script>
+
+        <link href="../css/bootstrapValidator.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/bootstrap/bootstrapValidator.min.js" type="text/javascript"></script>
+
+        <script src="../js/funcionesLogin.js" type="text/javascript"></script>
+        <script src="../js/chartJS/Chart.min.js" type="text/javascript"></script>
+
+        <style>
+            .caja{
+                margin: auto;
+                max-width: 250px;
+                padding: 20px;
+                border: 1px solid #BDBDBD;
+            }
+            .caja select{
+                width: 100%;
+                font-size: 16px;
+                padding: 5px;
+            }
+            .resultados{
+                margin: auto;
+                margin-top: 40px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="barraNavegacion"></div>
+
+        <div class="col-lg-12" >
+            <h1>Estadísticas generales</h1>
+            <table width="98%" align="center" >
+                <!-- ________________________________ Columna detalles ________________________________ -->
+                <tr>
+                    <td width="12%" valign="top">
+                        <ul class="nav nav-sidebar">
+                            <li class="active"><a><h3>Generar <span class="sr-only">(current)</span></h3></a></li>
+                            <li><a id="mostrarVentasXprov">Ventas por provincia</a></li>
+                            <li><a id="mostrarTopXprod">Top productos</a></li>
+                            <li><a id="mostrarFacturasXperiodo">Facturas emitidas en periodo</a></li>
+                            <li><a id="mostrarFacturasXusuario">Facturas emitidas por un usuario</a></li>
+                            <li><a id="mostrarVentasProductoXperiodo">Ventas de un producto</a></li>
+                        </ul>
+                    </td>
+                    <!-- ________________________________ Columna valores ________________________________ -->
+                    <td width="88%" valign="top">
+                        <div class="col-lg-12" >
+                            <!--h1 align="center">Estadísticas generales</h1-->
+
+                            <div id="ventasXprov" class="resultados" >
+                                <h4>Ventas por provincia</h4>
+                                <canvas id="grafico" width="500"></canvas>
+                            </div>
+
+                            <div id="topProductos" class="resultados">
+                                <h4>TOP productos</h4>
+                                <canvas id="grafico2" width="500"></canvas>
+                            </div>
+
+                            <div id="facturasXperiodo" class="resultados">
+                                <h4>Facturas emitidas en periodo</h4>
+                                <table>
+                                    <tr>
+                                        <td>Desde</td>
+                                        <td>
+                                            <input type="text" id="txtFacturasXperiodoINICIO" size="10" />
+                                        </td>
+                                        <td>Hasta</td>
+                                        <td>
+                                            <input type="text" id="txtFacturasXperiodoFIN" size="10" />
+                                        </td>
+                                        <td>
+                                            <button id="btnGenerarFacturasXperiodo" class="btn-info">Generar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table  id="tablaFacturasXperiodo" align="center">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuario</th>
+                                            <th>Factura</th>
+                                            <th>Fecha</th>
+                                            <th>Cliente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <canvas id="grafico3"></canvas>
+                            </div>
+                            <div id="facturasXusuario">
+                                <h4>Facturas por usuario</h4>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Usuario:
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtFacturasXusuario">
+                                        </td>
+                                        <td>
+                                            <input type="button" id="btnGenerarFacturasXusuario" class="btn btn-info" value="Buscar">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table id="tablaFacturasXusuario" border align="center">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuario</th>
+                                            <th>Fecha</th>
+                                            <th>Factura</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="ventasProductoXperiodo">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Producto
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtVentasProductoXperiodoPRODUCTO"/>
+                                        </td>
+                                        <td>
+                                            Desde
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtVentasProductoXperiodoINICIO"/>
+                                        </td>
+                                        <td>
+                                            Hasta
+                                        </td>
+                                        <td>
+                                            <input type="text" id="txtVentasProductoXperiodoFIN"/>
+                                        </td>
+                                        <td>
+                                            <button class="btn-info" id="btnGenerarVentasProductoXperiodo">Listar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="tablaVentasProductoXperiodo">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="4">
+                                                <div id="tituloTablaVentasProductoXperiodo"></div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Cantidad
+                                            </th>
+                                            <th>
+                                                Numero Factura
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Cliente
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- ________________________________ FIN TABLA ________________________________ -->
+        </div>
+        <script src="../js/funcionesEstadistica.js" type="text/javascript"></script>
+    </body>
+</html>

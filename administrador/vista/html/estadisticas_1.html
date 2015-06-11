@@ -1,0 +1,244 @@
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="col-lg-12" id="contenido">
+                <h1>Estadísticas generales</h1>
+                <div class="col-md-2"></div>
+                <table width="98%" align="center" border class="col-md-10">
+                    <!--table width="98%" align="center" -->
+                    <!-- ________________________________ Columna detalles ________________________________ -->
+                    <tr>
+                        <td width="12%" valign="top">
+                            <ul class="nav nav-sidebar">
+                                <li class="active"><a><h3>Generar <span class="sr-only">(current)</span></h3></a></li>
+                                <li><a id="mostrarVentasXprov">Cantidad de clientes por provincia</a></li>
+                                <li><a id="mostrarTopXprod">Productos mas vendidos</a></li>
+                                <li><a id="mostrarFacturasXperiodo">Facturas emitidas en periodo</a></li>
+                                <li><a id="mostrarFacturasXusuario">Facturas emitidas por un usuario</a></li>
+                                <li><a id="mostrarVentasProductoXperiodo">Ventas de un producto</a></li>
+                                <li><a id="mostrarVentasXclientes">Cantidad de ventas realizadas por cliente</a></li>
+                                <li><a id="mostrarVentasProductoCliente">Ventas de productos por cliente</a></li>
+                                <li><a id="mostrarFacturasXtipo">Tipos de facturas generadas</a></li>
+                            </ul>
+                        </td>
+                        <!-- ________________________________ Columna valores ________________________________ -->
+                        <td width="88%" valign="top" style="color: #FFFFFF">
+                            <div class="col-lg-12" >
+                                <!--h1 align="center">Estadísticas generales</h1-->
+
+                                <div id="ventasXprov" class="resultados" >
+                                    <h4>Cantidad de clientes por provincia</h4>
+                                    <canvas id="grafico" width="500"></canvas>
+                                </div>
+
+                                <div id="topProductos" class="resultados">
+                                    <h4>Productos mas vendidos</h4>
+                                    <canvas id="grafico2" width="500"></canvas>
+                                </div>
+
+                                <div id="facturasXperiodo" class="resultados">
+                                    <h4>Facturas emitidas en periodo</h4>
+                                    <table>
+                                        <tr>
+                                            <td>Desde</td>
+                                            <td>
+                                                <input type="text" id="txtFacturasXperiodoINICIO" size="10" />
+                                            </td>
+                                            <td>Hasta</td>
+                                            <td>
+                                                <input type="text" id="txtFacturasXperiodoFIN" size="10" />
+                                            </td>
+                                            <td>
+                                                <button id="btnGenerarFacturasXperiodo" class="btn-info">Generar</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table  id="tablaFacturasXperiodo" align="center">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Factura</th>
+                                                <th>Fecha</th>
+                                                <th>Cliente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <canvas id="grafico3"></canvas>
+                                </div>
+                                <div id="facturasXusuario">
+                                    <h4>Facturas por usuario</h4>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Usuario:
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtFacturasXusuario">
+                                            </td>
+                                            <td>
+                                                <input type="button" id="btnGenerarFacturasXusuario" class="btn btn-info" value="Buscar">
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table id="tablaFacturasXusuario" border align="center">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Fecha</th>
+                                                <th>Factura</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="ventasProductoXperiodo">
+                                    <h4>Facturas por usuario</h4>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Producto
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtVentasProductoXperiodoPRODUCTO"/>
+                                            </td>
+                                            <td>
+                                                Desde
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtVentasProductoXperiodoINICIO"/>
+                                            </td>
+                                            <td>
+                                                Hasta
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtVentasProductoXperiodoFIN"/>
+                                            </td>
+                                            <td>
+                                                <button class="btn-info" id="btnGenerarVentasProductoXperiodo">Listar</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table id="tablaVentasProductoXperiodo">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4">
+                                        <div id="tituloTablaVentasProductoXperiodo"></div>
+                                        </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Cantidad
+                                            </th>
+                                            <th>
+                                                Numero Factura
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Cliente
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div id="ventasXclientes">
+                                    <h4>Cantidad de ventas realizadas por cliente</h4>
+                                    <table id="tableVentasXclientes" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Cliente
+                                                </th>
+                                                <th>
+                                                    Cantidad de compras realizadas
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div id="ventasProductoCliente">
+                                    <h4>Ventas de productos por cliente</h4>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Desde
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtVentasProductoClienteINICIO"/>
+                                            </td>
+                                            <td>
+                                                Hasta
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtVentasProductoClienteFIN"/>
+                                            </td>
+                                            <td>
+                                                <button class="btn-info" id="btnGenerarVentasProductoCliente">Listar</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table id="tablaVentasProductoCliente" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5">
+                                        <div id="tituloTablaVentasProductoCliente"></div>
+                                        </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Producto
+                                            </th>
+                                            <th>
+                                                Cantidad
+                                            </th>
+                                            <th>
+                                                Numero Factura
+                                            </th>
+                                            <th>
+                                                Cliente
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div id="facturasXtipo">
+                                    <h4>Tipos de facturas generadas</h4>
+                                    <div align="center">
+                                        <canvas id="graficoTortaFacturasXtipo" width="200" height="200"></canvas>
+                                    </div>
+                                    <table id="tablaFacturasXtipo" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    Tipo Factura
+                                                </td>
+                                                <td>
+                                                    Cantidad
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- ________________________________ FIN TABLA ________________________________ -->
+            </div>
+        </div>
+    </div></div>

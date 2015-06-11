@@ -1,0 +1,73 @@
+<div id="wrapper">
+
+    <div id="page-wrapper">
+        <div>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Sistema de Facturación
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <input type="hidden" id="id" name="id">
+                <table align="center" class="table-bordered table-striped" width="500px">
+                    <tr>
+                        <th>Tipo Factura: </th>
+                        <td><div id="tipoF"></div></td>
+                    </tr>
+                    <tr>
+                        <th>Cliente: </th>
+                        <td>
+                            <input type="text" id="clientes" style="width:100%">
+                        </td>
+                    </tr>
+                    <!--tr>
+                        <th>Tipo Cliente: </th>
+                        <td><div id="tipoC" ></div></td>
+                    </tr-->
+                    <tr>
+                        <th>Nuevo Producto: </th>
+                        <td>
+                            <input type="button" class="btn btn-info" id="agregarProd" value="agregar">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Cantidad</th>
+                                        <th>Codigo</th>
+                                        <th>Producto</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Subtotal</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoTablaDetalle"></tbody>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <th colspan="1">Total:</th>
+                                    <td class="total">0</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <input type="button" class="btn btn-info" id="guardarFactura" value="Guardar">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>

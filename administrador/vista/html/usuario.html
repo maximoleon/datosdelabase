@@ -1,0 +1,243 @@
+<div id="wrapper">
+
+    <div id="page-wrapper">
+        <div>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Usuarios ::<small> Administración</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- /.row --><!-- /.row --><!-- /.row -->
+
+                <div class="navbar-form navbar-default" align="center">
+                    <select class="selectpicker" id="criterioBusqueda">
+                        <option value="1">Nombre Usuario</option>
+                        <option value="2">Nivel Acceso</option>
+                    </select>
+                    <input type="search" id="valorBusqueda" class="form-control" placeholder="Search for...">
+                    <button class="btn btn-info" id="btnBuscar" type="button">Buscar</button>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td align="center">
+                            <button class="btn btn-primary btn-lg" id="agregarUsuario">
+                                Agregar
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+                <form id="imprimirUsuario" target="_blank" method="post">
+                    <input type="hidden" id="Formulario" name="Formulario" value="Usuarios"/>
+                    <input type="hidden" id="html" name="html"/>
+                </form>
+
+                <table class="table" id="tablaUsuario">
+                    <thead>
+                        <tr>
+                            <th>Nombre Usuario</th>
+                            <th>Nivel Acceso</th>
+                            <th>acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaUsuario">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+
+    <!-- INICIO Modal -->
+    <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formUsuario" class="form-horizontal"
+                      data-bv-message="Este valor No es válido"
+                      data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                      data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                      data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+                      data-bv-submitbuttons='button[type="submit"]'
+                      data-bv-trigger="focus blur"
+                      data-bv-live="enabled">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="tituloModal">Nueva Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--    DECLARO UN HIDDEN ID     -->
+                        <div class="form-group">
+                            <input class="form-control" type="hidden" id="id" name="id">
+                        </div>
+                        <!--    DECLARO UN TEXTBOX NRO FACTURA     -->
+                        <div class="form-group">
+                            <label class='col-lg-2'>Nombre Usuario</label>
+                            <div class='col-lg-10'>
+                                <input class="form-control" type="text" id="nombre" name="nombre"
+                                       data-bv-notempty="true"
+                                       data-bv-notempty-message="Debes completar el Nombre de Usuario">
+                            </div>
+                        </div>
+                        <!--    DECLARO UN TEXTBOX APELLIDO     -->
+                        <div class="form-group">
+                            <label class='col-lg-2' id="lblClave">Contraseña</label>
+                            <div class='col-lg-10'>
+                                <input class="form-control" type="password" id="clave" name="clave"
+                                       data-bv-notempty="true"
+                                       data-bv-notempty-message="Debes completar la Contraseña"
+
+                                       data-bv-stringlength="true"
+                                       data-bv-stringlength-min="8"
+                                       data-bv-stringlength-max="8"
+                                       data-bv-stringlength-message="La contraseña debe ser de 8 caracteres">
+                            </div>
+                        </div>
+                        <!--    DECLARO UN TEXTBOX LEGAJO     -->
+                        <div class="form-group">
+                            <label class='col-lg-2'>Nivel de Acceso</label>
+                            <div class='col-lg-10'>
+                                <input class="form-control" type="text" id="nvlAcceso" name="nvlAcceso"
+                                       data-bv-message="El Nivel de Acceso no es válido"
+
+                                       data-bv-notempty="true"
+                                       data-bv-notempty-message="Debes completar el Nivel de Acceso"
+
+                                       data-bv-regexp="true"
+                                       data-bv-regexp-regexp="[0-9]+"
+                                       data-bv-regexp-message="Solo números en este campo"
+
+                                       data-bv-stringlength="true"
+                                       data-bv-stringlength-min="1"
+                                       data-bv-stringlength-max="2"
+                                       data-bv-stringlength-message="El Nivel de Acceso debe ser del 0 al 99">
+                            </div>     
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="guardar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- /.row -->
+
+
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+
+<!-- /#wrapper -->
+
+<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formProducto" class="form-horizontal"
+                  data-bv-message="Este valor No es válido"
+                  data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                  data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                  data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+                  data-bv-submitbuttons='button[type="submit"]'
+                  data-bv-trigger="focus blur"
+                  data-bv-live="enabled">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="tituloModal">Nuevo Producto</h4>
+                </div>
+                <div class="modal-body">
+                    <!--    DECLARO UN HIDDEN ID     -->
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" id="id" name="id">
+                        <input class="form-control" type="hidden" id="idTabla" name="idTabla">
+                    </div>
+                    <!--    DECLARO UN TEXTBOX NOMBRE     -->
+                    <div class="form-group">
+                        <label class='col-lg-2'>Código</label>
+                        <div class='col-lg-10'>
+                            <input class="form-control" type="text" id="codigo" name="codigo"
+                                   data-bv-message="El código no es válido"
+
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="Debes completar el código"
+
+                                   data-bv-regexp="true"
+                                   data-bv-regexp-regexp="[0-9]+"
+                                   data-bv-regexp-message="Solo números en este campo"
+
+                                   data-bv-stringlength="true"
+                                   data-bv-stringlength-min="5"
+                                   data-bv-stringlength-max="5"
+                                   data-bv-stringlength-message="El código debe tener 5 caracteres">
+                        </div>
+                    </div>
+                    <!--    DECLARO UN TEXTBOX APELLIDO     -->
+                    <div class="form-group">
+                        <label class='col-lg-2'>Nombre</label>
+                        <div class='col-lg-10'>
+                            <input class="form-control" type="text" id="nombre" name="nombre"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="Debes completar el Nombre">
+                        </div>
+                    </div>
+                    <!--    DECLARO UN TEXTBOX LEGAJO     -->
+                    <div class="form-group">
+                        <label class='col-lg-2'>Precio</label>
+                        <div class='col-lg-10'>
+                            <input class="form-control" type="text" id="precio" name="precio"
+                                   data-bv-message="El precio no es válido"
+
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="Debes completar el precio"
+
+                                   data-bv-regexp="true"
+                                   data-bv-regexp-regexp="[0-9]+"
+                                   data-bv-regexp-message="Solo números en este campo">
+                        </div>     
+                    </div>
+                    <!--    DECLARO UN TEXTBOX NUMERO     -->
+                    <div class="form-group">
+                        <label class='col-lg-2'>Stock</label>
+                        <div class='col-lg-10'>
+                            <input class="form-control" type="text" id="stock" name="stock"
+                                   data-bv-message="El stock no es válido"
+
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="Debes completar el stock"
+
+                                   data-bv-regexp="true"
+                                   data-bv-regexp-regexp="[0-9]+"
+                                   data-bv-regexp-message="Solo números en este campo"
+
+                                   data-bv-stringlength="true"
+                                   data-bv-stringlength-min="1"
+                                   data-bv-stringlength-max="6"
+                                   data-bv-stringlength-message="El Numero debe estar entre 0 y 9999">
+                        </div>     
+                    </div>
+                    <!--    DECLARO UN CHECKBOX     -->
+                    <div class="form-group">
+                        <label class='col-lg-2'>Disponible?</label>
+                        <div class='col-lg-10'>
+                            <input class="form-control" type="checkbox" checked="checked" id="disponible" name="disponible">
+                        </div>     
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="guardar" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
