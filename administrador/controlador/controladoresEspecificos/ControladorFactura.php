@@ -14,6 +14,7 @@ class ControladorFactura extends ControladorGeneral {
     }
 
     private function validar($datos) {
+        print_r($datos);
         if (isset($datos["factura"])) {
             if (isset($datos["factura"]["cuil"])) {
                 $cuil = trim($datos["factura"]["cuil"]);

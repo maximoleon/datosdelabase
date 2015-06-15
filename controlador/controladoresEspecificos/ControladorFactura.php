@@ -14,10 +14,11 @@ class ControladorFactura extends ControladorGeneral {
     }
 
     private function validar($datos) {
+        //print_r(filter_var($datos["factura"]["cuil"], FILTER_VALIDATE_INT));
         if (isset($datos["factura"])) {
             if (isset($datos["factura"]["cuil"])) {
                 $cuil = trim($datos["factura"]["cuil"]);
-                if ($cuil == "" || filter_var($cuil, FILTER_VALIDATE_INT) === FALSE || $cuil < 0) {
+                if ($cuil == "" || $cuil < 0) {
                     throw new Exception("Cuil incorrecto");
                 }
             } else {
