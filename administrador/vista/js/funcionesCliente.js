@@ -48,7 +48,12 @@ $(function () {
 
             $("#guardar").on("click", function (event) {
                 event.preventDefault();
-                app.guardarCliente();
+                if (app.validar()) {
+                    app.guardarCliente();
+                }else{
+                    alert("Completa bien culiao!!!");
+                }
+                
             });
 
             $("#formCliente").bootstrapValidator({
@@ -58,6 +63,16 @@ $(function () {
             $("#imprimir").on('click', function (event) {   //Evento onclick boton
                 app.imprimir();
             });
+        };
+        
+        app.validar = function (){
+            var valido = true;
+            var cuil = $("#cuilCliente").val().trim();
+            if (cuil == "" || isNaN(cuil) || cuil < 0 || cuil.lenght != 11) {
+                console.log("cuil: "+cuil);
+                valido = false;
+            }
+            return valido;
         };
 
         app.acciones = function (datos) {

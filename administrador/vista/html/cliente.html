@@ -98,7 +98,17 @@
                         <div class='col-lg-10'>
                             <input class="form-control" type="text" id="cuilCliente" name="cuilCliente"
                                    data-bv-notempty="true"
-                                   data-bv-notempty-message="Debes completar el Nombre">
+                                   data-bv-notempty-message="Debes completar el CUIL"
+                                   
+                                   data-bv-regexp="true"
+                                   
+                                   data-bv-regexp-regexp="[0-9]+"
+                                   data-bv-regexp-message="Solo números en este campo"
+
+                                   data-bv-stringlength="true"
+                                   data-bv-stringlength-min="11"
+                                   data-bv-stringlength-max="11"
+                                   data-bv-stringlength-message="El CUIL debe tener 11 caracteres">
                         </div>
                     </div>
                     <div class="form-group">
