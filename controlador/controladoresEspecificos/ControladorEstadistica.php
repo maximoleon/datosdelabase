@@ -1,5 +1,6 @@
 <?php
 require_once 'ControladorGeneral.php';
+require_once 'ControladorProducto.php';
 class ControladorEstadistica extends ControladorGeneral{
     function __construct() {
         parent::__construct();
@@ -81,9 +82,51 @@ class ControladorEstadistica extends ControladorGeneral{
     
     function generarTiposFacturasEmitidas(){
         try {
+            $refProducto = new ControladorProducto();
             $resultado = $this->refControladorPersistencia->ejecutarSentencia(DbSentencias::TIPOS_FACTURAS_GENERADAS);
+            
             $listado = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            return $listado;
+            
+            $retorno = array();
+            $retorno["grafico"] = $listado;
+            
+            $resultado = $this->refControladorPersistencia->ejecutarSentencia(DbSentencias::CANTIDAD_FACTURADA_X_TIPO);
+            $listado = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $totalA = 0;
+            $totalB = 0;
+            $totalC = 0;
+            $subTotal = 0;
+            $countA = 0;
+            $countB = 0;
+            $countC = 0;
+            foreach ($listado as $value) {
+                $dato = array("id" => $value["id_producto_detalleFactura"], "fecha" => $value["fecha_factura"]);
+                
+                $subTotal = $value["cantidad_detalleFactura"] * $refProducto->obtenerPrecio($dato);
+                switch ($value["tipo_tipoFactura"]){
+                    case "A":
+                        $totalA += $subTotal;
+                        $countA++;
+                        break;
+                    case "B":
+                        $totalB += $subTotal;
+                        $countB++;
+                        break;
+                    case "C":
+                        $countC++;
+                        $totalC += $subTotal;
+                        break;
+                    default:
+                        throw new Exception("SE murio todo =( Yacomo");
+                }
+            }
+            $aa = array();
+            
+            $retorno["tabla"][0] = array("tipo" => "A","total" => $totalA,"cantidad" => $countA);
+            $retorno["tabla"][1] = array("tipo" => "B","total" => $totalB,"cantidad" => $countB);
+            $retorno["tabla"][2] = array("tipo" => "C","total" => $totalC,"cantidad" => $countC);
+            //$retorno["tabla"] = array("A" => $totalA, "B" => $totalB, "C" => $totalC, "Ac" => $countA, "Bc" => $countB, "Cc" => $countC);
+            return $retorno;
         } catch (Exception $e) {
             throw new Exception("tipos-facturas-generadas: " . $e->getMessage());
         }

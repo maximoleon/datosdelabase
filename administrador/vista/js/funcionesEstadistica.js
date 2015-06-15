@@ -53,6 +53,7 @@ $(function () {
             });
 
             $("#mostrarFacturasXtipo").on('click', function (event) {   //Evento onclick boton
+                
                 app.ocultar();
                 app.tiposFacturasGeneradas();
                 $("#facturasXtipo").show();
@@ -252,7 +253,7 @@ $(function () {
 
         app.tiposFacturasGeneradas = function () {
             var url = locacion+"controlador/ruteador/Ruteador.php?accion=generarTiposFacturasEmitidas&formulario=Estadistica";
-
+            
             var acum = 0;
             $.ajax({
                 url: url,
@@ -260,11 +261,13 @@ $(function () {
                 dataType: 'json',
                 success: function (data) {
                     app.acciones(data);
-                    app.cargarTablaFacturasXtipo(data);
-                    $.each(data, function (clave, factura) {
+                    console.log(data)
+                    app.cargarTablaFacturasXtipo(data["tabla"]);
+                    var acum = data["tabla"][0]["cantidad"]+data["tabla"][1]["cantidad"]+data["tabla"][2]["cantidad"];
+                    /*$.each(data, function (clave, factura) {
                         acum += parseInt(factura.Cantidad);
-                    });
-                    app.graficoTiposFacturasGeneradas(data, acum);
+                    });*/
+                    app.graficoTiposFacturasGeneradas(data["grafico"], acum);
                 },
                 error: function (data) {
 
@@ -410,14 +413,19 @@ $(function () {
 
         app.cargarTablaFacturasXtipo = function (datos) {
             //Limpio la tabla
+            
+            
+            console.log("datos");
+            console.log(datos);
             $('#tablaFacturasXtipo').dataTable().fnDestroy();
 
             $('#tablaFacturasXtipo').dataTable({
                 data: datos,
                 "searching": false,
                 "columns": [
-                    {"data": "Tipo"},
-                    {"data": "Cantidad"}
+                    {"data": "tipo"},
+                    {"data": "cantidad"},
+                    {"data": "total"}
                 ]
             }).api();
             $('#tablaFacturasXtipo').show();
@@ -485,6 +493,7 @@ $(function () {
         };
 
         app.graficoTiposFacturasGeneradas = function (data, total) {
+            
             var colores = [["#FF0000", "#CE0505"], ["#0900FF", "#0600B0"], ["#1EFF00", "#15B000"]]; //Truchada xDD
             var datos = [];
 

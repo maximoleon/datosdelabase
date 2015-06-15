@@ -138,4 +138,8 @@ INNER JOIN `productos` ON `id_producto` = `id_producto_detalleFactura` GROUP BY 
     
     const TIPOS_FACTURAS_GENERADAS = 'SELECT tipo_tipoFactura AS Tipo, COUNT(*) AS Cantidad FROM facturas INNER JOIN tiposfactura ON id_tipo_factura = id_tipoFactura GROUP BY tipo_tipoFactura';
     
+    const CANTIDAD_FACTURADA_X_TIPO = 'SELECT `fecha_factura`, `id_producto_detalleFactura`, `cantidad_detalleFactura`, `tipo_tipoFactura` FROM `facturas`
+INNER JOIN `detallesfactura` ON `nro_factura_detalleFactura` = `nro_factura`
+INNER JOIN `tiposfactura` ON `id_tipoFactura`=`id_tipo_factura`
+INNER JOIN `productos` ON `id_producto` = `id_producto_detalleFactura`';
 }
